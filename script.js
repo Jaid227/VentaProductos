@@ -57,3 +57,46 @@ document.addEventListener('keydown', function(e) {
 document.addEventListener('DOMContentLoaded', function() {
     mostrarSeccion('baterias');
 });
+
+
+
+// =========================
+// MODO CLARO / OSCURO
+// =========================
+
+function toggleTheme() {
+    const body = document.body;
+    const currentTheme = body.getAttribute('data-theme');
+    const btn = document.querySelector('.toggle-theme');
+    
+    if (currentTheme === 'light') {
+        body.removeAttribute('data-theme');
+        btn.textContent = '🌙';
+        localStorage.setItem('theme', 'dark');
+    } else {
+        body.setAttribute('data-theme', 'light');
+        btn.textContent = '☀️';
+        localStorage.setItem('theme', 'light');
+    }
+}
+
+// Cargar tema guardado
+function loadTheme() {
+    const savedTheme = localStorage.getItem('theme');
+    const btn = document.querySelector('.toggle-theme');
+    
+    if (savedTheme === 'light') {
+        document.body.setAttribute('data-theme', 'light');
+        btn.textContent = '☀️';
+    } else {
+        document.body.removeAttribute('data-theme');
+        btn.textContent = '🌙';
+    }
+}
+
+// Ejecutar al cargar la página
+document.addEventListener('DOMContentLoaded', function() {
+    loadTheme();
+    // Mostrar la primera sección por defecto
+    mostrarSeccion('baterias');
+});
